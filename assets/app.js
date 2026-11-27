@@ -637,6 +637,7 @@
   var map = null;
   var mapMarkers = {};
   var mapGroups = [];
+  var markerLayer = null;
 
   function hasGeo(l) { return l.lat && l.lng; }
 
@@ -716,8 +717,10 @@
     });
     if (!found || !map || !mapMarkers[found.key]) return false;
     setActivePin(id);
-    map.flyTo([found.lat, found.lng], Math.max(map.getZoom(), 14), { duration: 0.5 });
-    setTimeout(function () { mapMarkers[found.key].openPopup(); }, 380);
+    var mk = mapMarkers[found.key];
+    if (markerLayer && !markerLayer.hasLayer(mk)) markerLayer.addLayer(mk);
+    map.flyTo([found.lat, found.lng], Math.max(map.getZoom(), 15), { duration: 0.5 });
+    setTimeout(function () { try { mk.openPopup(); } catch (e) {} }, 620);
     return true;
   }
 
@@ -763,15 +766,17 @@
     view.forEach(function (l) { vis[String(l.id)] = 1; });
     mapGroups.forEach(function (g) {
       var mk = mapMarkers[g.key];
-      if (!mk) return;
+      if (!mk || !markerLayer) return;
       var on = g.items.some(function (l) { return vis[String(l.id)]; });
-      var el = mk.getElement && mk.getElement();
-      if (el) el.style.display = on ? '' : 'none';
+      var inLayer = markerLayer.hasLayer(mk);
+      if (on && !inLayer) markerLayer.addLayer(mk);
+      else if (!on && inLayer) markerLayer.removeLayer(mk);
     });
     var key = state.filters.slice().sort().join(',') + '|' + view.length;
     if (key !== lastFitKey) {
       lastFitKey = key;
       fitMap(visibleGroups());
+      if (map) map.closePopup();
     }
     labelPins();
   }
@@ -794,7 +799,7 @@
       var mk = mapMarkers[g.key];
       if (!mk) return;
       var node = mk.getElement && mk.getElement();
-      if (!node || node.style.display === 'none') return;
+      if (!node) return;
       var pin = node.querySelector('.pin');
       if (!pin) return;
       pin.classList.remove('has-lbl');
@@ -827,6 +832,19 @@
       '</span>';
   }
 
+  /* 권역 클러스터 — 몇 건이 모였는지 큰 숫자로 */
+  function clusterIcon(cluster) {
+    var n = cluster.getChildCount();
+    var sale = 0, rent = 0;
+    cluster.getAllChildMarkers().forEach(function (mk) { if (mk._deal === '매매') sale++; else rent++; });
+    var cls = sale >= rent ? 'cl-sale' : 'cl-rent';
+    return L.divIcon({
+      html: '<span class="cl ' + cls + '"><b class="num">' + n + '</b><i>건</i></span>',
+      className: 'clwrap',
+      iconSize: [56, 56]
+    });
+  }
+
   function initMap() {
     var el = document.getElementById('mapCanvas');
     var fb = document.getElementById('mapFallback');
@@ -836,6 +854,7 @@
 
     if (map) { map.remove(); map = null; }
     mapMarkers = {};
+    markerLayer = null;
     el.hidden = false;
     if (fb) { fb.hidden = true; fb.innerHTML = ''; }
     if (!window.L || !mapGroups.length) { mapFallback(mapGroups); return; }
@@ -854,15 +873,29 @@
     });
     tiles.addTo(map);
 
+    markerLayer = L.markerClusterGroup
+      ? L.markerClusterGroup({
+          maxClusterRadius: 46,
+          disableClusteringAtZoom: 15,
+          showCoverageOnHover: false,
+          spiderfyOnMaxZoom: true,
+          zoomToBoundsOnClick: true,
+          iconCreateFunction: clusterIcon
+        })
+      : L.layerGroup();
+    map.addLayer(markerLayer);
+
     mapGroups.forEach(function (g) {
       var icon = L.divIcon({ className: 'pinwrap', html: pinHTML(g), iconSize: [1, 1], iconAnchor: [1, 1] });
       var mk = L.marker([g.lat, g.lng], {
         icon: icon, title: g.region + ' ' + (g.items.length > 1 ? g.items.length + '건' : ''), riseOnHover: true, keyboard: true
       });
       mk._items = g.items;
+      mk._deal = g.deal;
+      mk._group = g;
       mk.bindPopup(popupHTML(g), { maxWidth: 320, minWidth: 240, closeButton: true, autoPanPadding: [26, 26], offset: [0, -4] });
       mk.on('popupopen', function () { setActivePin(g.items[0].id); });
-      mk.addTo(map);
+      markerLayer.addLayer(mk);
       mapMarkers[g.key] = mk;
     });
 

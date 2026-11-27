@@ -800,3 +800,15 @@ ul,ol{padding:0;list-style:none}
 /* 구글폼 접수 버튼 */
 .cob-form{background:linear-gradient(150deg,#2E7BF0,#1E5FD0);color:#fff;box-shadow:0 6px 16px rgba(30,95,208,.28)}
 .cob-form:hover{background:linear-gradient(150deg,#3A87FF,#2058C4)}
+
+/* ── 9. 권역 클러스터 (지도) ─────────────────────────────────────────── */
+.clwrap{background:none;border:0}
+.cl{display:flex;align-items:baseline;justify-content:center;gap:1px;width:56px;height:56px;border-radius:50%;
+  color:#fff;font-weight:800;box-shadow:0 8px 20px rgba(9,17,34,.28);border:3px solid rgba(255,255,255,.92);
+  transition:transform .15s,box-shadow .15s;align-items:center}
+.cl b{font-size:21px;letter-spacing:-0.03em;line-height:1}
+.cl i{font-style:normal;font-size:11.5px;font-weight:700;opacity:.85;margin-left:1px}
+.cl-sale{background:radial-gradient(circle at 35% 30%,#3D8BF7,#1E5FD0)}
+.cl-rent{background:radial-gradient(circle at 35% 30%,#25497F,#0F2557)}
+.clwrap:hover .cl{transform:scale(1.07);box-shadow:0 10px 26px rgba(9,17,34,.34)}
+.leaflet-cluster-anim .leaflet-marker-icon,.leaflet-cluster-anim .leaflet-marker-shadow{transition:transform .25s ease-out,opacity .25s ease-out}
