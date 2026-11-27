@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 825" width="1200" height="825" role="img" aria-label="창고 매물 사진 준비 중">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#0B1B3B"/>
+      <stop offset="0.5" stop-color="#102657"/>
+      <stop offset="1" stop-color="#153465"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0.02" r="0.75">
+      <stop offset="0" stop-color="#3C82F0" stop-opacity="0.34"/>
+      <stop offset="0.6" stop-color="#1E6AE1" stop-opacity="0.07"/>
+      <stop offset="1" stop-color="#1E6AE1" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1" fill="#FFFFFF" fill-opacity="0.09"/>
+    </pattern>
+    <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="825" fill="url(#bg)"/>
+  <rect width="1200" height="825" fill="url(#glow)"/>
+  <rect width="1200" height="825" fill="url(#dots)" opacity="0.38"/>
+
+  <g fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 지붕 -->
+    <path d="M132 268 L600 128 L1068 268" stroke-opacity="0.78" stroke-width="3"/>
+    <path d="M196 268 L600 148 L1004 268" stroke-opacity="0.14" stroke-width="1.6"/>
+    <!-- 벽체 -->
+    <path d="M160 268 V628 H1040 V268" stroke-opacity="0.74" stroke-width="3"/>
+    <path d="M160 268 H1040" stroke-opacity="0.22" stroke-width="1.6"/>
+    <!-- 패널 세로선 -->
+    <path d="M305 274 V628 M450 274 V628 M595 274 V628 M740 274 V628 M885 274 V628" stroke-opacity="0.08" stroke-width="1.4"/>
+    <path d="M160 352 H1040" stroke-opacity="0.07" stroke-width="1.4"/>
+    <!-- 캐노피 -->
+    <path d="M225 452 H975" stroke-opacity="0.5" stroke-width="2.4"/>
+    <path d="M225 452 V468 H975 V452" stroke-opacity="0.18" stroke-width="1.6"/>
+    <!-- 도크 3기 -->
+    <g stroke-opacity="0.5" stroke-width="2.6">
+      <rect x="265" y="492" width="150" height="136" rx="2"/>
+      <rect x="525" y="492" width="150" height="136" rx="2"/>
+      <rect x="785" y="492" width="150" height="136" rx="2"/>
+    </g>
+    <g stroke-opacity="0.13" stroke-width="1.4">
+      <path d="M267 518 H413 M267 544 H413 M267 570 H413 M267 596 H413"/>
+      <path d="M527 518 H673 M527 544 H673 M527 570 H673 M527 596 H673"/>
+      <path d="M787 518 H933 M787 544 H933 M787 570 H933 M787 596 H933"/>
+    </g>
+    <!-- 사람 출입문 -->
+    <rect x="686" y="546" width="64" height="82" stroke-opacity="0.3" stroke-width="2"/>
+    <!-- 지면 -->
+    <path d="M60 628 H1140" stroke-opacity="0.36" stroke-width="2"/>
+    <path d="M110 660 H1090" stroke-opacity="0.09" stroke-width="1.4"/>
+    <!-- 치수선 -->
+    <path d="M160 700 H1040" stroke-opacity="0.2" stroke-width="1.4"/>
+    <path d="M160 688 V712 M1040 688 V712" stroke-opacity="0.2" stroke-width="1.4"/>
+    <path d="M116 268 V628" stroke-opacity="0.14" stroke-width="1.4"/>
+    <path d="M104 268 H128 M104 628 H128" stroke-opacity="0.14" stroke-width="1.4"/>
+  </g>
+
+  <path d="M160 628 H1040 L1120 725 H80 Z" fill="url(#floor)"/>
+</svg>
