@@ -167,10 +167,40 @@
     copy: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M15 6V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h1"/></svg>',
     pin: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6.5-5.6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.3"/></svg>',
     out: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6"/><path d="M20 4 11 13"/><path d="M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg>',
+    map: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6.5-5.6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.3"/></svg>',
+    navi: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11-1-1 9.5-6L21 10l-1 1"/><path d="M5 10v10h14V10"/><path d="M9.5 20v-6h5v6"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6.5 18.5 12 13 17.5"/></svg>'
   };
 
   function rankLabel(l) { return l.isRef ? '참고' : l.rank + '순위'; }
+
+  /* ── 카카오맵 링크 ─────────────────────────────────────────────────────
+     data/listings.js 에 kakaoMap·kakaoRoute 가 있으면 그대로 쓰고,
+     좌표만 있으면 공식 링크 형식으로 만들어 줍니다.                  */
+  function hasGeo(l) { return l && Number(l.lat) && Number(l.lng); }
+  function mapName(l) {
+    return encodeURIComponent(l.mapName || ('부동산판 ' + (l.region || '') + ' ' + (l.title || '')).trim());
+  }
+  function kakaoMapHref(l) {
+    if (l.kakaoMap) return l.kakaoMap;
+    if (hasGeo(l)) return 'https://map.kakao.com/link/map/' + mapName(l) + ',' + l.lat + ',' + l.lng;
+    return 'https://map.kakao.com/link/search/' + encodeURIComponent(l.address || l.title || '');
+  }
+  function kakaoRouteHref(l) {
+    if (l.kakaoRoute) return l.kakaoRoute;
+    if (hasGeo(l)) return 'https://map.kakao.com/link/to/' + mapName(l) + ',' + l.lat + ',' + l.lng;
+    return 'https://map.kakao.com/link/search/' + encodeURIComponent(l.address || l.title || '');
+  }
+  function priceLine(l) {
+    var d = won(l.deposit), r = won(l.rent);
+    return '보 ' + d.num + d.unit + ' · 월 ' + r.num + r.unit;
+  }
+  function precisionText(l) {
+    if (!hasGeo(l)) return '';
+    return l.mapPrecision && l.mapPrecision !== '지번'
+      ? '좌표는 ' + l.mapPrecision + ' 기준점 · 정확한 필지는 카카오맵에서 확인'
+      : '지번 좌표 기준 · 카카오맵에서 필지 확인';
+  }
 
   function cardHTML(l) {
     var s = scoreOf(l);
@@ -213,8 +243,13 @@
           '<div class="track" role="img" aria-label="조건 8개 중 충족 ' + s.ok + ', 확인 필요 ' + s.check + ', 미충족 ' + s.no + '">' + track + '</div>' +
           '<p class="card-note">' + esc(l.note) + '</p>' +
           '<div class="card-foot">' +
-            '<span class="broker">' + esc(l.brokerName) + '</span>' +
-            '<span class="more">상세 보기' + ICO.arrow + '</span>' +
+            '<div class="cf-top"><span class="broker">' + esc(l.brokerName) + '</span></div>' +
+            '<div class="cf-acts">' +
+              '<a class="kbtn" href="' + esc(kakaoMapHref(l)) + '" target="_blank" rel="noopener noreferrer"' +
+                ' aria-label="' + esc(l.region + ' ' + l.title + ' 카카오맵에서 위치 보기') + '"' +
+                ' title="카카오맵에서 위치 보기">' + ICO.map + '카카오맵</a>' +
+              '<span class="more">상세 보기' + ICO.arrow + '</span>' +
+            '</div>' +
           '</div>' +
         '</div>' +
       '</article>';
@@ -357,11 +392,20 @@
     return '' +
       '<h2 class="m-title" id="mTitle">' + esc(l.title) + '</h2>' +
       '<p class="m-sub">' + esc(l.subtitle) + '</p>' +
-      '<p class="m-addr">' + ICO.pin + esc(l.address) + '</p>' +
+      '<p class="m-addr">' + '<a href="' + esc(kakaoMapHref(l)) + '" target="_blank" rel="noopener noreferrer">' + ICO.pin + esc(l.address) + '</a></p>' +
 
       '<div class="m-grid">' +
         '<div class="m-left">' +
           '<div class="m-photo">' + media + '</div>' + photoCredit +
+          '<div class="m-map">' +
+            '<p class="lab">위치</p>' +
+            '<p class="ad">' + ICO.pin + '<span>' + esc(l.address) + '</span></p>' +
+            (precisionText(l) ? '<p class="prec">' + esc(precisionText(l)) + '</p>' : '') +
+            '<div class="btns">' +
+              '<a class="btn btn-navy" href="' + esc(kakaoMapHref(l)) + '" target="_blank" rel="noopener noreferrer">' + ICO.map + '카카오맵</a>' +
+              '<a class="btn btn-line" href="' + esc(kakaoRouteHref(l)) + '" target="_blank" rel="noopener noreferrer">' + ICO.navi + '길찾기</a>' +
+            '</div>' +
+          '</div>' +
           '<div class="m-price">' +
             '<div class="row"><span class="lab">보증금</span><span class="val">' + priceHTML(l.deposit) + '</span></div>' +
             '<div class="row"><span class="lab">월세</span><span class="val">' + priceHTML(l.rent) + '</span></div>' +
@@ -406,6 +450,7 @@
     els.mCrumb.innerHTML = '<b>' + esc(l.region) + '</b> · 조건 ' + scoreOf(l).ok + '/8 충족';
     els.mBody.innerHTML = modalHTML(l);
     els.mBody.scrollTop = 0;
+    if (map) map.closePopup();
     els.mNext.disabled = idx >= view.length - 1;
     els.mPrev.disabled = idx <= 0;
 
@@ -530,6 +575,8 @@
   document.addEventListener('click', function (e) {
     var op = e.target.closest('[data-open]');
     if (op) { openModal(op.getAttribute('data-open')); return; }
+    var fc = e.target.closest('[data-focus]');
+    if (fc) { focusPin(fc.getAttribute('data-focus')); return; }
     var cp = e.target.closest('[data-copy]');
     if (cp) {
       copyText(cp.getAttribute('data-copy')).then(function (ok) {
@@ -610,6 +657,12 @@
         title: get('title'),
         subtitle: get('subtitle'),
         address: get('address'),
+        lat: num(get('lat')),
+        lng: num(get('lng')),
+        mapPrecision: get('map_precision'),
+        mapName: get('map_name'),
+        kakaoMap: get('kakao_map'),
+        kakaoRoute: get('kakao_route'),
         photo: get('photo'),
         photoNote: get('photo_note'),
         deposit: num(get('deposit')),
@@ -642,16 +695,208 @@
     }).filter(function (l) { return l.title; });
   }
 
+  /* ── 지도 (Leaflet 로컬 번들 + 카카오맵 링크) ──────────────────────── */
+  var map = null;
+  var mapMarkers = {};
+  var mapPts = [];
+
+  function renderMapLegend() {
+    var host = document.getElementById('mapLegend');
+    if (!host) return;
+    host.innerHTML = LISTINGS.map(function (l) {
+      var d2 = won(l.deposit), r2 = won(l.rent);
+      var shortRegion = String(l.region || '').replace(/^(남양주|양주|의정부)\s+/, '');
+      return '<button class="map-chip" type="button" data-focus="' + l.id + '" title="' + esc(l.region + ' · ' + priceLine(l)) + '">' +
+        '<b>' + (l.isRef ? '참' : l.rank) + '</b>' +
+        '<span class="mc-r">' + esc(shortRegion) + '</span>' +
+        '<span class="mc-p">' + d2.num + d2.unit + ' / ' + r2.num + r2.unit + '</span>' +
+      '</button>';
+    }).join('');
+  }
+
+  function mapRowHTML(l) {
+    return '<li class="mf-row">' +
+      '<span class="mf-r">' + esc(rankLabel(l)) + '</span>' +
+      '<div class="mf-b">' +
+        '<p class="mf-t">' + esc(l.title) + '</p>' +
+        '<p class="mf-a">' + esc(l.address) + '</p>' +
+        '<p class="mf-p">' + esc(priceLine(l)) + '</p>' +
+      '</div>' +
+      '<a class="mf-k" href="' + esc(kakaoMapHref(l)) + '" target="_blank" rel="noopener noreferrer">카카오맵</a>' +
+    '</li>';
+  }
+
+  /* 지도 스크립트·타일을 못 불러왔을 때: 주소·금액 목록으로 깔끔하게 대체 */
+  function mapFallback() {
+    var cv = document.getElementById('mapCanvas');
+    var fb = document.getElementById('mapFallback');
+    if (!fb) return;
+    if (cv) cv.hidden = true;
+    fb.hidden = false;
+    fb.innerHTML = '<p class="mf-lead">지도를 표시하지 못했습니다. 매물 위치는 아래에서 확인하세요.</p>' +
+      '<ul class="mf-list">' + mapPts.map(mapRowHTML).join('') + '</ul>';
+  }
+
+  function popupHTML(l) {
+    var d = won(l.deposit), r = won(l.rent);
+    var specs = [
+      l.area ? l.area.toLocaleString('ko-KR') + '평' : '',
+      l.height ? '층고 ' + l.height + 'm' : '',
+      l.dock && l.dock !== '미기재' ? '도크 ' + l.dock : '',
+      l.vehicle && l.vehicle !== '미기재' ? l.vehicle : ''
+    ].filter(Boolean).join(' · ');
+    return '<div class="pk">' +
+      '<p class="pk-r">' + esc(rankLabel(l)) + ' · ' + esc(l.region) + '</p>' +
+      '<p class="pk-t">' + esc(l.title) + '</p>' +
+      '<div class="pk-price">' +
+        '<span>보증금</span><b>' + d.num + d.unit + '</b>' +
+        '<span>월세</span><b>' + r.num + r.unit + '</b>' +
+      '</div>' +
+      (specs ? '<p class="pk-s">' + esc(specs) + '</p>' : '') +
+      '<div class="pk-btns">' +
+        '<a class="pk-k" href="' + esc(kakaoMapHref(l)) + '" target="_blank" rel="noopener noreferrer">카카오맵</a>' +
+        '<button class="pk-d" type="button" data-open="' + l.id + '">상세 보기</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function setActivePin(id) {
+    Object.keys(mapMarkers).forEach(function (k) {
+      var el = mapMarkers[k].getElement();
+      if (!el) return;
+      var pin = el.querySelector('.pin');
+      if (pin) pin.classList.toggle('is-active', String(k) === String(id));
+    });
+  }
+
+  function fitMap() {
+    if (!map || !mapPts.length) return;
+    if (mapPts.length === 1) { map.setView([mapPts[0].lat, mapPts[0].lng], 13); return; }
+    var b = L.latLngBounds(mapPts.map(function (l) { return [l.lat, l.lng]; }));
+    map.fitBounds(b, { padding: [56, 56], maxZoom: 13 });
+  }
+
+  /* 핀·라벨·팝업이 서로 가리지 않도록, 자리가 되는 핀에만 금액 라벨을 보입니다 */
+  function labelPins() {
+    if (!map) return;
+    var pins = [];
+    var items = [];
+    var size = map.getSize();
+    mapPts.forEach(function (l) {
+      var mk = mapMarkers[l.id];
+      if (!mk) return;
+      var node = mk.getElement();
+      var pin = node && node.querySelector('.pin');
+      if (!pin) return;
+      pin.classList.remove('has-lbl');
+      var p = map.latLngToContainerPoint(mk.getLatLng());
+      var box = { x: p.x - 16, y: p.y - 16, w: 32, h: 32 };
+      pins.push({ id: String(l.id), box: box });
+      items.push({ id: String(l.id), pin: pin, x: p.x, y: p.y });
+    });
+    items.sort(function (a, b) { return a.y - b.y; });
+    var W = 132, H = 26;
+    var taken = [];
+    items.forEach(function (it) {
+      var right = { x: it.x + 17, y: it.y - H / 2, w: W, h: H };
+      var left = { x: it.x - 17 - W, y: it.y - H / 2, w: W, h: H };
+      var box = null, flip = false;
+      if (right.x + right.w <= size.x - 8) box = right;
+      else if (left.x >= 8) { box = left; flip = true; }
+      if (!box) return;                                    // 양쪽 다 자리가 없으면 숨김
+      var hit = taken.some(function (b) { return overlaps(box, b); }) ||
+                pins.some(function (p) { return p.id !== it.id && overlaps(box, p.box); });
+      it.pin.classList.toggle('flip', flip);
+      it.pin.classList.toggle('has-lbl', !hit);
+      if (!hit) taken.push(box);
+    });
+    function overlaps(a, b) {
+      return !(a.x + a.w < b.x || b.x + b.w < a.x || a.y + a.h < b.y || b.y + b.h < a.y);
+    }
+  }
+
+  function focusPin(id) {
+    var l = LISTINGS.filter(function (x) { return String(x.id) === String(id); })[0];
+    var mk = l && mapMarkers[l.id];
+    if (!mk || !map) return false;
+    setActivePin(l.id);
+    map.flyTo([l.lat, l.lng], Math.max(map.getZoom(), 12), { duration: 0.55 });
+    setTimeout(function () { mk.openPopup(); }, 700);
+    return true;
+  }
+
+  function initMap() {
+    var el = document.getElementById('mapCanvas');
+    var fb = document.getElementById('mapFallback');
+    if (!el) return;
+    mapPts = LISTINGS.filter(hasGeo);
+    renderMapLegend();
+
+    if (map) { map.remove(); map = null; }
+    mapMarkers = {};
+    el.hidden = false;
+    if (fb) fb.hidden = true;
+    if (!window.L || !mapPts.length) { mapFallback(); return; }
+
+    map = L.map(el, { zoomControl: true, scrollWheelZoom: false, attributionControl: false, worldCopyJump: true });
+
+    var tileErrs = 0, tileFailed = false;
+    var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19, crossOrigin: true
+    });
+    tiles.on('tileerror', function () {
+      tileErrs += 1;
+      if (tileFailed || tileErrs < 3) return;
+      tileFailed = true;
+      el.classList.add('is-offline');
+      var note = document.getElementById('mapNote');
+      if (note) note.hidden = false;
+    });
+    tiles.addTo(map);
+
+    mapPts.forEach(function (l) {
+      var icon = L.divIcon({
+        className: 'pinwrap',
+        html: '<span class="pin' + (l.isRef ? ' is-ref' : '') + '">' +
+                '<b class="pin-d">' + (l.isRef ? '참' : l.rank) + '</b>' +
+                '<span class="pin-l">' + esc(priceLine(l)) + '</span>' +
+              '</span>',
+        iconSize: [1, 1],
+        iconAnchor: [1, 1]
+      });
+      var mk = L.marker([l.lat, l.lng], {
+        icon: icon, title: l.region + ' ' + l.title, riseOnHover: true, keyboard: true
+      });
+      mk.bindPopup(popupHTML(l), {
+        maxWidth: 300, minWidth: 236, closeButton: true, autoPanPadding: [28, 28], offset: [0, -6]
+      });
+      mk.on('popupopen', function () { setActivePin(l.id); });
+      mk.addTo(map);
+      mapMarkers[l.id] = mk;
+    });
+
+    fitMap();
+    requestAnimationFrame(function () {
+      if (!map) return;
+      map.invalidateSize();
+      fitMap();
+      labelPins();
+    });
+    map.on('zoomend moveend', labelPins);
+    window.addEventListener('resize', function () { setTimeout(labelPins, 180); });
+  }
+
   function boot() {
     renderCriteria();
     update();
+    initMap();
 
     if (SHEET_CSV_URL) {
       fetch(SHEET_CSV_URL, { cache: 'no-store' })
         .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
         .then(function (csv) {
           var rows = fromSheet(csv);
-          if (rows.length) { LISTINGS = rows; update(); }
+          if (rows.length) { LISTINGS = rows; update(); initMap(); }
         })
         .catch(function (err) { console.warn('[매물 시트] 불러오기 실패, 로컬 데이터로 표시합니다:', err.message); });
     }

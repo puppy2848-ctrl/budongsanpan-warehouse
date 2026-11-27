@@ -10,7 +10,10 @@
  *       deposit / rent / maint / vat / area / area_note / site
  *       height / height_note / dock / vehicle / width / slope / built / use
  *       broker_name / broker_tel / broker_mobile / link / source / note / photo
+ *       lat / lng / map_precision / map_name / kakao_map / kakao_route
  *     - 금액(deposit·rent·maint)은 원 단위 숫자만 (예: 32000000)
+ *     - 지도: lat·lng(위도·경도)만 있으면 지도에 핀이 자동으로 찍히고,
+ *       카카오맵 링크(kakao_map·kakao_route)가 비어 있으면 좌표로 만들어 씁니다.
  *     - 조건 8개 판정은 conditions_1 ~ conditions_8 열에 "ok / no / check"로
  *  2) 시트에서 [파일 → 공유 → 웹에 게시] 로 CSV 주소를 만들고,
  *     assets/app.js 상단의 SHEET_CSV_URL 에 그 주소를 넣으면
@@ -28,6 +31,10 @@ window.WAREHOUSE_LISTINGS = [
     title: '진벌리 647-9 신축 808평',
     subtitle: '2026.10.19 사용승인 · 40ft 트레일러 진출입 · 화물 E/V',
     address: '남양주시 진접읍 진벌리 647-9',
+    lat: 37.735377, lng: 127.215296, mapPrecision: '지번',
+    mapName: '부동산판 진벌리 647-9',
+    kakaoMap: 'https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%A7%84%EB%B2%8C%EB%A6%AC%20647-9,37.735377,127.215296',
+    kakaoRoute: 'https://map.kakao.com/link/to/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%A7%84%EB%B2%8C%EB%A6%AC%20647-9,37.735377,127.215296',
     photo: 'assets/photo-1.jpg',
     photoNote: '출처 · 당근부동산 매물 사진',
     deposit: 500000000,
@@ -81,6 +88,10 @@ window.WAREHOUSE_LISTINGS = [
     title: '양지로 149-78 · 도크 완비',
     subtitle: '2016.12 준공 · 복층 400평 포함 약 1,000평 · 즉시 입주',
     address: '남양주시 오남읍 양지로 149-78',
+    lat: 37.69109, lng: 127.198074, mapPrecision: '도로명',
+    mapName: '부동산판 오남 양지로 149-78',
+    kakaoMap: 'https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%98%A4%EB%82%A8%20%EC%96%91%EC%A7%80%EB%A1%9C%20149-78,37.69109,127.198074',
+    kakaoRoute: 'https://map.kakao.com/link/to/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%98%A4%EB%82%A8%20%EC%96%91%EC%A7%80%EB%A1%9C%20149-78,37.69109,127.198074',
     photo: 'assets/photo-2.jpg',
     photoNote: '출처 · 당근부동산 매물 사진',
     deposit: 300000000,
@@ -134,6 +145,10 @@ window.WAREHOUSE_LISTINGS = [
     title: '차산리 · 층고 9m 단일층',
     subtitle: '화도IC 인근 · 크레인 5톤 · 전체 리모델링 · 즉시 입주',
     address: '남양주시 화도읍 차산리 (화도IC 인근)',
+    lat: 37.626154, lng: 127.301144, mapPrecision: '리 단위',
+    mapName: '부동산판 화도 차산리',
+    kakaoMap: 'https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%ED%99%94%EB%8F%84%20%EC%B0%A8%EC%82%B0%EB%A6%AC,37.626154,127.301144',
+    kakaoRoute: 'https://map.kakao.com/link/to/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%ED%99%94%EB%8F%84%20%EC%B0%A8%EC%82%B0%EB%A6%AC,37.626154,127.301144',
     photo: 'assets/photo-3.jpg',
     photoNote: '출처 · 당근부동산 매물 사진 (건화부동산)',
     deposit: 100000000,
@@ -187,6 +202,10 @@ window.WAREHOUSE_LISTINGS = [
     title: '회암동 · 가설 포함 1,000평',
     subtitle: '대로변 · 기숙사·사무실 완비 · 즉시 입주',
     address: '양주시 회암동 (청담부동산중개)',
+    lat: 37.852121, lng: 127.10299, mapPrecision: '동 단위',
+    mapName: '부동산판 양주 회암동',
+    kakaoMap: 'https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%96%91%EC%A3%BC%20%ED%9A%8C%EC%95%94%EB%8F%99,37.852121,127.10299',
+    kakaoRoute: 'https://map.kakao.com/link/to/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%96%91%EC%A3%BC%20%ED%9A%8C%EC%95%94%EB%8F%99,37.852121,127.10299',
     photo: '',
     photoNote: '사진 미제공 · 매물 설명 기준',
     deposit: 200000000,
@@ -241,6 +260,10 @@ window.WAREHOUSE_LISTINGS = [
     title: '홍죽산단 인근 · 층고 12m',
     subtitle: '참고 매물 · 광활한 마당 · 대형차 진회차 가능',
     address: '양주시 백석읍 홍죽산업단지 인근 (정토 75067)',
+    lat: 37.799028, lng: 126.959092, mapPrecision: '동 단위',
+    mapName: '부동산판 양주 홍죽산단',
+    kakaoMap: 'https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%96%91%EC%A3%BC%20%ED%99%8D%EC%A3%BD%EC%82%B0%EB%8B%A8,37.799028,126.959092',
+    kakaoRoute: 'https://map.kakao.com/link/to/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EC%96%91%EC%A3%BC%20%ED%99%8D%EC%A3%BD%EC%82%B0%EB%8B%A8,37.799028,126.959092',
     photo: '',
     photoNote: '영상 매물 · 대표 사진 준비 중 (원문 영상 참고)',
     deposit: 600000000,
