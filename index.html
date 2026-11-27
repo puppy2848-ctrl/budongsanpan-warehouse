@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>부동산판 공장·창고 매물장 | 경기 북부 · 인천 대형 공장·창고 아카이브</title>
-<meta name="description" content="의정부·양주·남양주 1,000평 상온창고 의뢰 조건 기준 매물 아카이브. 지도에서 위치를 한눈에 보고, 지역·평수·층고·도크·차량 진입·보증금·월세로 바로 걸러 보세요. 조건 8개 대비 판정과 현장 확인 체크리스트, 카카오맵 길찾기까지.">
+<title>공장·창고 공동중개 매물 아카이브 | 부동산판 — 인천 매매 109건 · 경기 북부 임대 5건</title>
+<meta name="description" content="공장·창고 공동중개 매물 아카이브. 인천 매매 109건(73필지)과 경기 북부 임대 5건을 지역·평수·가격만 쳐도 바로 찾을 수 있습니다. 지도 핀에서 담당 부동산 연락처와 카카오맵 길찾기까지 한 번에.">
 <meta name="theme-color" content="#0F2557">
-<meta property="og:title" content="부동산판 공장·창고 매물장 — 대형 공장·창고 매물 아카이브">
-<meta property="og:description" content="지역·평수·층고·도크·금액으로 바로 검색. 조건 8개 대비 판정과 현장 확인 체크리스트까지.">
+<meta property="og:title" content="공장·창고 공동중개 매물 아카이브 | 부동산판">
+<meta property="og:description" content="중개사님이 함께 찾고 함께 중개하는 공장·창고 매물 허브. 인천 매매 109건 + 경기 북부 임대 5건, 지도·연락처 바로 연결.">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F2557'/%3E%3Cpath d='M7 14.5 16 8l9 6.5V24H7z' fill='none' stroke='%23fff' stroke-width='1.9' stroke-linejoin='round'/%3E%3Cpath d='M12.5 24v-5.5h7V24' fill='none' stroke='%235B9BF5' stroke-width='1.9' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
@@ -20,7 +20,7 @@
 <!-- ── header ─────────────────────────────────────────────────────────── -->
 <header class="hdr" id="hdr">
   <div class="hdr-in">
-    <a class="brand" href="#top" aria-label="부동산판 공장·창고 매물장 홈">
+    <a class="brand" href="#top" aria-label="공장·창고 공동중개 매물 아카이브 홈">
       <svg viewBox="0 0 32 32" aria-hidden="true">
         <rect width="32" height="32" rx="8" fill="#0F2557"/>
         <path d="M7 14.6 16 8l9 6.6V24H7z" fill="none" stroke="#FFFFFF" stroke-width="1.9" stroke-linejoin="round"/>
@@ -28,16 +28,16 @@
       </svg>
       <span class="b1">부동산판</span>
       <span class="sep" aria-hidden="true"></span>
-      <span class="b2">공장·창고 매물장</span>
+      <span class="b2">공동중개 매물장</span>
     </a>
     <nav class="nav" aria-label="주요 메뉴">
-      <a href="#listings">매물 검색</a>
+      <a href="#listings">매물 찾기</a>
       <a href="#map">지도</a>
-      <a href="#criteria">의뢰 조건</a>
+      <a href="#cobroker">공동중개</a>
       <a href="#contact">오시는 길</a>
     </nav>
     <div class="hdr-cta">
-      <a class="btn btn-navy btn-sm" href="#contact">매물 등록 문의</a>
+      <a class="btn btn-kakao btn-sm" href="http://pf.kakao.com/_gbXRX/chat" target="_blank" rel="noopener noreferrer">공동중개 문의 (카톡)</a>
     </div>
   </div>
 </header>
@@ -57,41 +57,95 @@
         <rect x="130" y="262" width="65" height="70" stroke-opacity="0.22"/>
         <rect x="235" y="262" width="65" height="70" stroke-opacity="0.22"/>
         <rect x="340" y="262" width="65" height="70" stroke-opacity="0.22"/>
-        <path d="M132 278h61M132 296h61M132 314h61M237 278h61M237 296h61M237 314h61M342 278h61M342 296h61M342 314h61" stroke-opacity="0.05"/>
         <path d="M440 288h34v44h-34z" stroke-opacity="0.16"/>
         <path d="M500 240h66v92h-66" stroke-opacity="0.2"/>
-        <path d="M514 254h38M514 268h38" stroke-opacity="0.08"/>
         <path d="M30 332H610" stroke-opacity="0.24" stroke-width="1.6"/>
-        <path d="M60 352H560" stroke-opacity="0.06"/>
         <path d="M95 372H500" stroke-opacity="0.14"/>
-        <path d="M95 364V380M500 364V380" stroke-opacity="0.14"/>
-        <path d="M64 175V332" stroke-opacity="0.10"/>
       </g>
     </svg>
     <div class="wrap">
-      <p class="eyebrow">FLY BUDONGSAN · 공장·창고 매물 아카이브</p>
-      <h1><span class="top">경기 북부 · 인천</span>대형 공장·창고 매물 아카이브</h1>
-      <p class="lede">원하는 조건을 그대로 걸러 보세요. 1차 수록은 <b>의정부 · 양주 · 남양주</b> 1,000평 상온창고 의뢰 기준 <b>5건</b>입니다.</p>
+      <p class="eyebrow">부동산판공인중개사사무소 · 공동중개 허브</p>
+      <h1><span class="top">중개사님이 함께 찾고 함께 중개하는</span>공장·창고 공동중개 매물 아카이브</h1>
+      <p class="lede">인천 공장·창고 <b>매매 109건(73필지)</b>과 <b>경기 북부 임대 5건</b>을 한곳에 모았습니다. 어렵게 찾지 마시고 <b>지역·평수·가격</b>만 쳐 보세요. 담당 부동산 전화번호와 카카오맵 길찾기가 바로 나옵니다.</p>
 
-      <div class="search" id="searchBox">
-        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" aria-hidden="true">
-          <circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.6-4.6"/>
+      <form class="bigsearch" id="searchForm" role="search" onsubmit="return false;">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-4.8-4.8"/>
         </svg>
-        <label class="sr" for="q">매물 검색</label>
+        <label class="sr" for="q">매물 찾기</label>
         <input id="q" type="search" autocomplete="off" spellcheck="false"
-               placeholder="지역 · 평수 · 키워드로 검색 (예: 남양주 800평, 도크, 40ft)">
+               placeholder="지역·평수·가격을 그냥 치세요 (예: 서구, 남양주, 800평, 10억)">
         <button class="clear" id="qClear" type="button" aria-label="검색어 지우기">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
         </button>
-      </div>
+        <button class="bigsearch-go" id="qGo" type="submit">찾기</button>
+      </form>
 
-      <div class="chips" id="chips" role="group" aria-label="빠른 필터"></div>
+      <div class="bigchips" id="bigChips" role="group" aria-label="매물 종류와 지역"></div>
+
+      <button class="moretoggle" id="moreToggle" type="button" aria-expanded="false" aria-controls="moreChips">
+        상세 조건 더보기 (층고 · 도크 · 평수)
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+      </button>
+      <div class="chips morechips" id="moreChips" hidden role="group" aria-label="상세 조건"></div>
 
       <p class="hero-meta">
-        <span><b class="num" id="heroCount">5</b>건 수록</span><i class="dot" aria-hidden="true"></i>
-        <span>조건 100% 충족 <b class="num">0</b>건</span><i class="dot" aria-hidden="true"></i>
-        <span>최종 갱신 <b class="num" style="font-size:15.5px">2026. 11. 27.</b></span>
+        <span><b class="num" id="heroCount">114</b>건 수록</span><i class="dot" aria-hidden="true"></i>
+        <span>매매 <b class="num">109</b> · 임대 <b class="num">5</b></span><i class="dot" aria-hidden="true"></i>
+        <span>최종 갱신 <b class="num" style="font-size:16px">2026. 11. 27.</b></span>
       </p>
+    </div>
+  </section>
+
+  <!-- ── 공동중개 바로가기 ─────────────────────────────────────────────── -->
+  <section class="coband" id="cobroker" aria-labelledby="cobandTitle">
+    <div class="wrap">
+      <div class="coband-card">
+        <div class="coband-txt">
+          <p class="coband-kicker">CO-BROKERAGE · 공동중개</p>
+          <h2 id="cobandTitle">매물이 없으면, 다른 중개사 물건을 함께 중개하세요</h2>
+          <p>중개사 카톡방에서 시작한 공장·창고 공동중개 허브입니다. 찾는 매물을 말씀해 주시면 이 아카이브에서 골라 드리고, 손님이 있으면 담당 부동산과 바로 연결해 드립니다.</p>
+        </div>
+        <div class="coband-acts">
+          <a class="cob-btn cob-kakao" href="http://pf.kakao.com/_gbXRX/chat" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12.5a7.5 7.5 0 0 1-8 7.4 8.6 8.6 0 0 1-2.5-.3L5 21l1.3-3.6A7.4 7.4 0 0 1 5 12.5 7.5 7.5 0 0 1 12.5 5 7.5 7.5 0 0 1 20 12.5Z"/><path d="M9.2 11.2h.01M12.5 11.2h.01M15.8 11.2h.01"/></svg>
+            공동중개 문의 (카톡)
+          </a>
+          <a class="cob-btn cob-tel" href="tel:010-8028-1848">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.6 4-2.2 1.5a12.5 12.5 0 0 0 6.1 6.1l1.5-2.2 4 1.6v3a2 2 0 0 1-2.2 2A17.5 17.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/></svg>
+            공동중개 전화 <span class="n num">010-8028-1848</span>
+          </a>
+          <a class="cob-btn cob-form" href="https://docs.google.com/forms/d/e/1FAIpQLScZuBbn-GkpoPEGhMv3PogJwaap8nl3wJVCXCW37432xJGLrg/viewform" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h9l3 3v13H8z"/><path d="M16.5 4v3.5H20"/><path d="M11 12h6M11 16h6"/></svg>
+            내 매물 올리기 · 찾는 매물 의뢰
+          </a>
+          <a class="cob-btn cob-sms" href="sms:010-8028-1848">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 9.6 9.6 0 0 1-2.8-.4L4 21l1.5-4a8.2 8.2 0 0 1-1.5-4.7 8.4 8.4 0 0 1 9-8.4 8.4 8.4 0 0 1 8 7.6Z"/></svg>
+            문자 접수
+          </a>
+        </div>
+      </div>
+
+      <div class="cogrid">
+        <div class="coinfo">
+          <h3>이렇게 하시면 됩니다</h3>
+          <ol>
+            <li><b>1</b><span>위 검색창에 지역·평수·가격을 칩니다. (예: 서구 800평)</span></li>
+            <li><b>2</b><span>마음에 드는 매물의 <b>전화</b> 버튼으로 담당 부동산에 바로 겁니다.</span></li>
+            <li><b>3</b><span>손님을 모시고 가기 전에 <b>카카오맵 길찾기</b>로 위치를 확인합니다.</span></li>
+          </ol>
+        </div>
+        <div class="coform">
+          <p class="coform-kicker">MATCHING REQUEST</p>
+          <h3>공동중개 매물 접수 · 찾는 매물 의뢰</h3>
+          <p>가지고 계신 공장·창고 매물을 올리시거나, 찾는 매물을 말씀해 주세요. 접수된 매물은 조건을 정리해 이 아카이브에 올리고, 맞는 손님이 있으면 바로 연결해 드립니다.</p>
+          <div class="coform-btns">
+            <a class="btn btn-navy btn-md" id="askFormBtn" href="https://docs.google.com/forms/d/e/1FAIpQLScZuBbn-GkpoPEGhMv3PogJwaap8nl3wJVCXCW37432xJGLrg/viewform" target="_blank" rel="noopener">공동중개 매물 접수하기</a>
+            <a class="btn btn-line btn-md" href="sms:010-8028-1848">문자로 접수</a>
+          </div>
+          <p class="coform-note" id="askFormNote">접수 폼은 1분이면 끝납니다. 폼이 안 열리면 카톡·문자로 접수해 주세요.</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -100,7 +154,7 @@
     <section class="crit" id="criteria" aria-labelledby="critTitle">
       <div class="crit-head">
         <span class="crit-kicker"><i aria-hidden="true"></i>고객 의뢰 조건 8</span>
-        <span class="crit-title" id="critTitle">이번 의뢰 기준 — 모든 매물을 항목별로 대조했습니다</span>
+        <span class="crit-title" id="critTitle">경기 북부 임대 5건은 이 기준으로 항목별 대조했습니다</span>
       </div>
       <div class="crit-grid" id="critGrid"></div>
     </section>
@@ -113,25 +167,25 @@
         <div class="map-head">
           <div>
             <p class="sec-kicker">LOCATION MAP</p>
-            <h2 id="mapTitle">매물 위치 한눈에 보기</h2>
-            <p class="map-desc">핀을 누르면 보증금·월세와 함께 요약이 열립니다. 각 매물의 <b>카카오맵</b> 버튼으로 실제 위치·길찾기를 확인하세요.</p>
+            <h2 id="mapTitle">지도에서 한눈에 찾기</h2>
+            <p class="map-desc">인천 <b>73필지</b>와 경기 북부 <b>5곳</b>을 지도에 찍었습니다. 핀을 누르면 그 자리 매물의 <b>가격·담당 부동산 전화번호</b>와 <b>카카오맵</b> 바로가기가 열립니다. 위의 지역 버튼을 누르면 그 지역만 남습니다.</p>
           </div>
-          <a class="btn btn-line btn-sm map-all" href="https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%20%EA%B3%B5%EC%9E%A5%C2%B7%EC%B0%BD%EA%B3%A0%20%EB%A7%A4%EB%AC%BC%205%EA%B1%B4,37.74,127.13" target="_blank" rel="noopener noreferrer">
+          <button class="btn btn-line btn-sm map-all" id="mapFit" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6.5-5.6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.3"/></svg>
-            카카오맵에서 크게 보기
-          </a>
+            전체 보기
+          </button>
         </div>
 
-        <div class="map-legend" id="mapLegend" role="group" aria-label="지도 위 매물 바로 가기"></div>
+        <div class="map-legend" id="mapLegend" role="group" aria-label="지역별 매물 바로 가기"></div>
 
         <div class="map-frame">
-          <div class="map-canvas" id="mapCanvas" role="application" aria-label="매물 5건의 위치를 표시한 지도"></div>
+          <div class="map-canvas" id="mapCanvas" role="application" aria-label="인천 73필지와 경기 북부 5건의 위치를 표시한 지도"></div>
           <div class="map-fallback" id="mapFallback" hidden></div>
           <p class="map-note" id="mapNote" hidden>지도 타일을 불러오지 못했습니다. 아래 매물 목록의 <b>카카오맵</b> 버튼으로 위치를 확인하세요.</p>
         </div>
-        <p class="map-credit">지도 © OpenStreetMap contributors · 위치는 지번·동 단위 기준</p>
+        <p class="map-credit">지도 © OpenStreetMap contributors · 위치는 지번 기준</p>
 
-        <p class="map-foot">지도 위치는 지번·도로명 주소를 좌표로 바꾼 기준점입니다. 실제 매물 필지와 조금 다를 수 있으니, 계약 전 <b>카카오맵</b>에서 정확한 위치와 진입로를 확인하세요.</p>
+        <p class="map-foot">핀 위치는 지번 주소를 좌표로 바꾼 필지 중심점입니다. 실제 필지와 조금 다를 수 있으니, 계약 전 <b>카카오맵</b>에서 정확한 위치와 진입로를 확인하세요.</p>
       </div>
     </div>
   </section>
@@ -142,18 +196,19 @@
       <div class="sec-head">
         <div>
           <p class="sec-kicker">LISTINGS</p>
-          <h2 id="listTitle">1차 수록 매물</h2>
-          <p>공개 매물과 중개사 제공 정보를 조건별로 대조해 정리했습니다. <b style="color:var(--ink-2);font-weight:600">순위는 조사·접수 순서</b>이고, 카드의 <b style="color:var(--ink-2);font-weight:600">‘조건 N/8’은 고객 조건 8개 대비 충족 수</b>입니다. 사진·금액은 등록 시점 기준이며 현장 확인 전 확정으로 보지 않습니다.</p>
+          <h2 id="listTitle">수록 매물</h2>
+          <p>인천은 네이버 부동산 공개 매물 <b style="color:var(--ink-2);font-weight:600">매매 109건</b>을 지번·좌표까지 확인했고, 경기 북부는 <b style="color:var(--ink-2);font-weight:600">임대 5건</b>을 고객 조건 8개와 대조했습니다. 카드의 <b style="color:var(--ink-2);font-weight:600">‘조건 N/8’은 임대 5건에만 적용</b>됩니다. 금액은 등록 시점 호가입니다.</p>
         </div>
         <div class="sortbox">
           <label for="sort">정렬</label>
           <div class="select">
             <select id="sort">
               <option value="rank">추천순</option>
+              <option value="price">매매가 낮은 순</option>
               <option value="rent">월세 낮은 순</option>
               <option value="deposit">보증금 낮은 순</option>
               <option value="height">층고 높은 순</option>
-              <option value="area">창고면적 큰 순</option>
+              <option value="area">면적 큰 순</option>
             </select>
             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
           </div>
@@ -161,7 +216,7 @@
       </div>
 
       <div class="toolbar" id="toolbar">
-        <p class="cnt" id="cnt">전체 <b class="num">5</b>건</p>
+        <p class="cnt" id="cnt">전체 <b class="num">114</b>건</p>
         <div class="active" id="activeTags"></div>
         <button class="reset" id="reset" type="button" hidden>필터 초기화</button>
       </div>
@@ -175,7 +230,7 @@
     <div class="wrap">
       <div class="contact-card">
         <div>
-          <p class="contact-kicker">부동산판공인중개사사무소</p>
+          <p class="contact-kicker">부동산판공인중개사사무소 · 공동중개</p>
           <h2 id="contactTitle">조건에 맞는 매물, 이 아카이브에 계속 올립니다</h2>
           <p>찾으시는 지역·평수·층고·도크·예산을 알려 주시면 새 매물이 확인되는 대로 조건 대조표와 함께 이 페이지에 수록합니다. 매물을 내놓으실 때도 같은 형식으로 정리해 드립니다.<br>
           <a class="addr-link" href="https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%EA%B3%B5%EC%9D%B8%EC%A4%91%EA%B0%9C%EC%82%AC%EC%82%AC%EB%AC%B4%EC%86%8C,37.477362,126.700993" target="_blank" rel="noopener noreferrer"><b>인천 부평구 열우물로 90</b>
@@ -183,13 +238,19 @@
             <span>카카오맵</span></a> · 공인중개사 최명자</p>
         </div>
         <div class="tel-box">
-          <p class="lab">전화 문의</p>
+          <p class="lab">공동중개 문의</p>
           <a href="tel:010-8028-1848">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M6.5 3.5h3l1.6 4-2.2 1.5a12.5 12.5 0 0 0 6.1 6.1l1.5-2.2 4 1.6v3a2 2 0 0 1-2.2 2A17.5 17.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2Z"/>
             </svg>
             010-8028-1848
           </a>
+          <div class="contact-btns">
+            <a class="btn btn-kakao btn-md" href="http://pf.kakao.com/_gbXRX/chat" target="_blank" rel="noopener noreferrer">카톡 문의</a>
+            <a class="btn btn-navy btn-md" href="tel:010-8028-1848">전화 걸기</a>
+            <a class="btn btn-line btn-md" href="sms:010-8028-1848">문자 접수</a>
+            <a class="btn btn-line btn-md" href="https://docs.google.com/forms/d/e/1FAIpQLScZuBbn-GkpoPEGhMv3PogJwaap8nl3wJVCXCW37432xJGLrg/viewform" target="_blank" rel="noopener">매물 접수 (폼)</a>
+          </div>
           <p class="sub">평일 09:00 – 19:00 · 방문 상담은 사전 연락 부탁드립니다</p>
         </div>
       </div>
@@ -211,16 +272,17 @@
           </svg>
           <span class="b1">부동산판</span>
           <span class="sep" aria-hidden="true"></span>
-          <span class="b2">공장·창고 매물장</span>
+          <span class="b2">공동중개 매물장</span>
         </a>
-        <p class="ftr-desc">대형 공장·창고 매물을 조건별로 대조해 정리한 아카이브입니다. 수록된 정보는 공개 매물과 중개사 제공 자료를 바탕으로 하며, 계약 전 현장 확인과 등기·건축물대장 확인이 필요합니다.</p>
+        <p class="ftr-desc">공장·창고 공동중개 매물 아카이브입니다. 인천 매매 109건과 경기 북부 임대 5건을 정리했고, 수록 정보는 공개 매물과 중개사 제공 자료를 바탕으로 합니다. 계약 전 현장 확인과 등기·건축물대장 확인이 필요합니다.</p>
       </div>
       <div>
         <h4>아카이브</h4>
         <ul>
-          <li><a href="#listings">매물 검색</a></li>
-          <li><a href="#criteria">의뢰 조건 8</a></li>
-          <li><a href="#contact">매물 등록·문의</a></li>
+          <li><a href="#listings">매물 찾기</a></li>
+          <li><a href="#map">지도로 보기</a></li>
+          <li><a href="#cobroker">공동중개 안내</a></li>
+          <li><a href="#contact">오시는 길</a></li>
         </ul>
       </div>
       <div>
@@ -228,7 +290,10 @@
         <ul>
           <li>부동산판공인중개사사무소</li>
           <li><a class="ftr-map" href="https://map.kakao.com/link/map/%EB%B6%80%EB%8F%99%EC%82%B0%ED%8C%90%EA%B3%B5%EC%9D%B8%EC%A4%91%EA%B0%9C%EC%82%AC%EC%82%AC%EB%AC%B4%EC%86%8C,37.477362,126.700993" target="_blank" rel="noopener noreferrer">인천 부평구 열우물로 90<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s6.5-5.6 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.4 12 21 12 21Z"/><circle cx="12" cy="10.2" r="2.3"/></svg></a></li>
-          <li><a href="tel:010-8028-1848">010-8028-1848</a></li>
+          <li><a href="tel:010-8028-1848">전화 010-8028-1848</a></li>
+          <li><a href="sms:010-8028-1848">문자 접수</a></li>
+          <li><a href="http://pf.kakao.com/_gbXRX/chat" target="_blank" rel="noopener noreferrer">카톡 공동중개 문의</a></li>
+          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScZuBbn-GkpoPEGhMv3PogJwaap8nl3wJVCXCW37432xJGLrg/viewform" target="_blank" rel="noopener">매물 접수 · 찾는 매물 의뢰</a></li>
         </ul>
       </div>
     </div>
@@ -244,7 +309,7 @@
   <div class="modal-bg" data-close></div>
   <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="mTitle" tabindex="-1">
     <div class="m-head">
-      <span class="m-rank" id="mRank">1순위</span>
+      <span class="m-rank" id="mRank">매매</span>
       <span class="m-crumb" id="mCrumb"></span>
       <div class="m-nav">
         <button class="m-icon" id="mPrev" type="button" aria-label="이전 매물">
@@ -265,13 +330,13 @@
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <noscript>
-  <div class="wrap" style="padding:20px 32px;background:#FFF6E8;color:#7A4E00;font-size:15px">
+  <div class="wrap" style="padding:20px 32px;background:#FFF6E8;color:#7A4E00;font-size:16px">
     매물 검색과 필터는 브라우저의 JavaScript가 켜져 있어야 동작합니다.
   </div>
 </noscript>
 
-<script src="data/listings.js"></script>
 <script src="assets/vendor/leaflet/leaflet.js"></script>
+<script src="data/listings.js"></script>
 <script src="assets/app.js"></script>
 </body>
 </html>
