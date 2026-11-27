@@ -880,8 +880,8 @@
   function setPlaceholder() {
     var short = window.matchMedia('(max-width: 720px)').matches;
     els.q.placeholder = short
-      ? '지역 · 평수 · 키워드 검색'
-      : '지역 · 평수 · 키워드로 검색 (예: 청천동 1,000평, 매매, 도크)';
+      ? '지역·평수·가격 (예: 서구 800평)'
+      : '지역·평수·가격을 그냥 치세요 (예: 서구, 남양주, 800평, 10억)';
   }
   setPlaceholder();
   var rzT;
@@ -959,7 +959,11 @@
   });
 
   var askBtn = document.getElementById('askFormBtn');
-  if (askBtn && FORM_URL) { askBtn.setAttribute('href', FORM_URL); askBtn.removeAttribute('target'); }
+  if (askBtn && FORM_URL) {
+    askBtn.setAttribute('href', FORM_URL);
+    askBtn.setAttribute('target', '_blank');
+    askBtn.setAttribute('rel', 'noopener');
+  }
 
 
   var legend = document.getElementById('mapLegend');

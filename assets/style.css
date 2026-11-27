@@ -612,6 +612,7 @@ ul,ol{padding:0;list-style:none}
   *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
   html{scroll-behavior:auto}
 }
+
 /* ════════════════════════════════════════════════════════════════════════
  *  v4 — 공장·창고 "공동중개" 매물 아카이브 + 큰 글씨/큰 버튼 UI
  *  (인천 매매 109건 + 경기북부 임대 5건 / 필지 묶음 지도 핀 / 공동중개 동선)
@@ -639,7 +640,7 @@ ul,ol{padding:0;list-style:none}
 .bigchips{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px;max-width:1000px}
 .bigchips .chip{height:58px;padding:0 24px;border-radius:15px;font-size:18.5px;font-weight:700;letter-spacing:-0.02em}
 .bigchips .chip .n{font-size:15px;margin-left:2px}
-.bigchips .chip.chip-all{background:rgba(255,255,255,.14)}
+.bigchips .chip.chip-all:not([aria-pressed="true"]){background:rgba(255,255,255,.14)}
 
 .moretoggle{display:inline-flex;align-items:center;gap:8px;margin-top:14px;height:46px;padding:0 18px;
   border:1px dashed rgba(255,255,255,.4);border-radius:12px;background:rgba(255,255,255,.06);
@@ -716,6 +717,8 @@ ul,ol{padding:0;list-style:none}
   box-shadow:0 3px 10px rgba(9,17,34,.18)}
 .pill-dup{right:13px;background:rgba(12,25,52,.82);color:#fff}
 .card.is-sale .card-region{color:#1E5FD0}
+
+.m-rank{flex:0 0 auto;white-space:nowrap}
 
 /* ── 5. 모달 — 담당 부동산 큰 번호·큰 버튼 ───────────────────────────── */
 .m-broker .lab{font-size:13px;letter-spacing:.08em}
